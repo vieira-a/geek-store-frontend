@@ -4,11 +4,19 @@ import AppHeader from "@/module/shared/component/AppHeader";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useProductStore } from "../../store/product.store";
+import { useCartStore } from "@/app/cart/store/cart.store";
 
 export default function ProductDetail() {
   const { slug, gsic } = useParams();
+  const { createCart, cart } = useCartStore();
 
   const { product, findProductBySlugAndGsic } = useProductStore();
+
+  const handleCreateCart = (productSlug: string, productGsic: string) => {
+    console.log("productSlug", productSlug);
+    console.log("productGsic", productGsic);
+    createCart(productSlug, productGsic);
+  };
 
   useEffect(() => {
     if (slug && gsic) {
@@ -38,7 +46,10 @@ export default function ProductDetail() {
           <p className="text-2xl font-semibold text-zinc-600 mt-4">
             R$ {product.price.toFixed(2)}
           </p>
-          <button className="bg-purple-600 hover:bg-purple-800 text-white px-6 py-4 rounded text-xs font-bold uppercase">
+          <button
+            onClick={() => handleCreateCart(product.slug, product.gsic)}
+            className="bg-purple-600 hover:bg-purple-800 text-white px-6 py-4 rounded text-xs font-bold uppercase"
+          >
             Adicionar à sacola
           </button>
         </div>
