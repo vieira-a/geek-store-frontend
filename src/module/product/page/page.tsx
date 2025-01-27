@@ -1,7 +1,12 @@
+import FeaturedProducts from "../component/FeaturedProducts";
+
 export default function ProductPage() {
   return (
-    <div>
+    <section className="px-60 py-8">
       <h1>Product Page</h1>
-    </div>
+      <div>
+        <FeaturedProducts />
+      </div>
+    </section>
   );
 }
