@@ -1,6 +1,6 @@
 export default function AppHero() {
   return (
-    <main className="bg-zinc-950 px-60 py-20">
+    <div className="bg-zinc-950 px-60 py-20">
       <div className="w-[60%] text-slate-100 flex flex-col gap-4">
         <h1 className=" text-6xl font-bold">
           Produtos Geek que você vai amar
@@ -11,6 +11,6 @@ export default function AppHero() {
           mundo Geek! Explore, escolha e aproveite.
         </p>
       </div>
-    </main>
+    </div>
   );
 }
