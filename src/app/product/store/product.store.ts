@@ -52,11 +52,8 @@ export const useProductStore = create<ProductState>()((set) => ({
         `http://localhost:3001/api/v1/products/${slug}/${gsic}`
       );
 
-      console.log("Buscando produto...");
-      console.log("response", response);
       const result: Product = await response.json();
 
-      console.log("Produto encontrado:", result); // Log do produto encontrado
       set({ product: result });
       return result;
     } catch (error) {

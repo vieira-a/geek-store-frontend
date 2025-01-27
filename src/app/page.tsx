@@ -4,14 +4,9 @@ import AppHero from "@/module/shared/component/AppHero";
 
 export default function Home() {
   return (
-    <>
-      <header>
-        <AppHeader />
-      </header>
-      <main>
-        <AppHero />
-        <FeaturedProducts />
-      </main>
-    </>
+    <main>
+      <AppHero />
+      <FeaturedProducts />
+    </main>
   );
 }
