@@ -19,5 +19,10 @@ export type ProductState = {
     hasPreviousPage: boolean;
     hasNextPage: boolean;
   };
+  product: Product;
   fetchProducts: (page?: number, meta?: number) => Promise<void>;
+  findProductBySlugAndGsic: (
+    slug: string,
+    gsic: string
+  ) => Promise<Product | undefined>;
 };

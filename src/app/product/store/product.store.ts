@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ProductState } from "../type/product.type";
+import { Product, ProductState } from "../type/product.type";
 
 export const useProductStore = create<ProductState>()((set) => ({
   data: [],
@@ -10,6 +10,16 @@ export const useProductStore = create<ProductState>()((set) => ({
     pageCount: 0,
     hasPreviousPage: false,
     hasNextPage: false,
+  },
+  product: {
+    name: "",
+    description: "",
+    slug: "",
+    gsic: "",
+    price: 0,
+    stock: 0,
+    category: "",
+    imageUrl: "",
   },
   fetchProducts: async (page: number = 1, take: number = 10) => {
     try {
@@ -31,6 +41,28 @@ export const useProductStore = create<ProductState>()((set) => ({
       });
     } catch (error) {
       console.error("Falha ao buscar produtos", error);
+    }
+  },
+  findProductBySlugAndGsic: async (
+    slug: string,
+    gsic: string
+  ): Promise<Product | undefined> => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/v1/products/${slug}/${gsic}`
+      );
+
+      console.log("Buscando produto...");
+      console.log("response", response);
+      const result: Product = await response.json();
+
+      console.log("Produto encontrado:", result); // Log do produto encontrado
+      set({ product: result });
+      return result;
+    } catch (error) {
+      console.error("Falha ao buscar produto", error);
+      set({ product: undefined });
+      return undefined;
     }
   },
 }));
