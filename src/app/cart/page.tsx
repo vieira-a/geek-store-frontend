@@ -16,8 +16,10 @@ export default function CartPage() {
       </div>
       {cart.items.map((item) => (
         <>
-          <div className="mt-4">
+          <div className="mt-4" key={item.gsic}>
             <ProductCartCard
+              cart={cart}
+              slug={item.slug}
               name={item.name}
               gsic={item.gsic}
               quantity={item.quantity}

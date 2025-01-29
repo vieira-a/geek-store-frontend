@@ -1,6 +1,7 @@
 type CartItem = {
   gsic: string;
   name: string;
+  slug: string;
   price: number;
   quantity: number;
   subtotal: number;

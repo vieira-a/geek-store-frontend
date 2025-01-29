@@ -45,6 +45,7 @@ export const useCartStore = create<CartState>((set) => ({
   },
 
   updateCart: async (sessionId, gsic, updateCart) => {
+    console.log("Atualizando");
     try {
       const response = await fetch(
         `http://localhost:3001/api/v1/carts/${sessionId}/${gsic}`,
