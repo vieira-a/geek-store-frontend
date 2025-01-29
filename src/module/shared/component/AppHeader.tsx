@@ -12,6 +12,9 @@ export default function AppHeader() {
             <li>
               <Link href="/produtos">Produtos</Link>
             </li>
+            <li>
+              <Link href="/cart">Carrrinho</Link>
+            </li>
           </ul>
         </nav>
       </div>

@@ -4,6 +4,7 @@ type CartItem = {
   price: number;
   quantity: number;
   subtotal: number;
+  imageUrl: string;
 };
 
 type UpdateCartItem = {
@@ -33,4 +34,5 @@ export type CartState = {
     gsic: string,
     updateCart: UpdateCart
   ) => Promise<Cart>;
+  loadCartFromLocalStorage: () => void;
 };

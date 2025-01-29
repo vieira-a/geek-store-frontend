@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { CartState } from "../type/cart.type";
+import { useEffect } from "react";
 
-export const useCartStore = create<CartState>()((set) => ({
+export const useCartStore = create<CartState>((set) => ({
   cart: {
     sessionId: "",
     gsic: "",
@@ -30,7 +31,6 @@ export const useCartStore = create<CartState>()((set) => ({
 
         if (response.ok) {
           const result = await response.json();
-
           set({ cart: result });
           localStorage.setItem("cart", JSON.stringify(result));
           return result;
@@ -71,4 +71,19 @@ export const useCartStore = create<CartState>()((set) => ({
       throw error;
     }
   },
+
+  loadCartFromLocalStorage: () => {
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        set({ cart: JSON.parse(storedCart) });
+      }
+    }
+  },
 }));
+
+export const useInitializeCart = () => {
+  useEffect(() => {
+    useCartStore.getState().loadCartFromLocalStorage();
+  }, []);
+};
