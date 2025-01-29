@@ -15,8 +15,8 @@ export default function CartPage() {
         <h4 className="text-2xl font-bold">Carrinho</h4>
       </div>
       {cart.items.map((item) => (
-        <>
-          <div className="mt-4" key={item.gsic}>
+        <div key={item.slug}>
+          <div className="mt-4">
             <ProductCartCard
               cart={cart}
               slug={item.slug}
@@ -28,7 +28,7 @@ export default function CartPage() {
             />
           </div>
           <hr />
-        </>
+        </div>
       ))}
       <div className="flex flex-col gap-3 text-right mt-4">
         <h4 className="text-lg">Produtos ({cart.totalItems})</h4>
