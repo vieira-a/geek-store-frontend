@@ -22,9 +22,10 @@ export const useProductStore = create<ProductState>()((set) => ({
     imageUrl: "",
   },
   fetchProducts: async (page: number = 1, take: number = 10) => {
+    const GEEKSTORE_API = process.env.NEXT_PUBLIC_GEEKSTORE_API_URL;
     try {
       const response = await fetch(
-        `http://localhost:3001/api/v1/products?page=${page}&take=${take}`
+        `${GEEKSTORE_API}/products?page=${page}&take=${take}`
       );
       const result = await response.json();
 
@@ -47,10 +48,9 @@ export const useProductStore = create<ProductState>()((set) => ({
     slug: string,
     gsic: string
   ): Promise<Product | undefined> => {
+    const GEEKSTORE_API = process.env.NEXT_PUBLIC_GEEKSTORE_API_URL;
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/products/${slug}/${gsic}`
-      );
+      const response = await fetch(`${GEEKSTORE_API}/products/${slug}/${gsic}`);
 
       const result: Product = await response.json();
 

@@ -13,6 +13,7 @@ export const useCartStore = create<CartState>((set) => ({
   },
 
   createCart: async (productSlug: string, productGsic: string) => {
+    const GEEKSTORE_API = process.env.NEXT_PUBLIC_GEEKSTORE_API_URL;
     try {
       const requestBody = {
         items: [{ slug: productSlug, gsic: productGsic, quantity: 1 }],
@@ -21,7 +22,7 @@ export const useCartStore = create<CartState>((set) => ({
       const localStorageCart = localStorage.getItem("cart");
 
       if (!localStorageCart) {
-        const response = await fetch(`http://localhost:3001/api/v1/carts`, {
+        const response = await fetch(`${GEEKSTORE_API}/carts`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -45,10 +46,10 @@ export const useCartStore = create<CartState>((set) => ({
   },
 
   updateCart: async (sessionId, gsic, updateCart) => {
-    console.log("Atualizando");
+    const GEEKSTORE_API = process.env.NEXT_PUBLIC_GEEKSTORE_API_URL;
     try {
       const response = await fetch(
-        `http://localhost:3001/api/v1/carts/${sessionId}/${gsic}`,
+        `${GEEKSTORE_API}/carts/${sessionId}/${gsic}`,
         {
           method: "PATCH",
           headers: {
