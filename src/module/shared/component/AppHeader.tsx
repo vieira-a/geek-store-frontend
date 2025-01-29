@@ -9,8 +9,8 @@ export default function AppHeader() {
         <Link href="/">
           <Image alt="Geek Store" width={110} height={14} src={Logo} />
         </Link>
-        <nav className="text-slate-100">
-          <ul>
+        <nav className="text-slate-100 gap-2">
+          <ul className="flex gap-4">
             <li>
               <Link href="/">Produtos</Link>
             </li>
