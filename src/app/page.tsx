@@ -1,4 +1,5 @@
 import FeaturedProducts from "@/app/product/component/FeaturedProducts";
+import AppFooter from "@/module/shared/component/AppFooter";
 import AppHero from "@/module/shared/component/AppHero";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main>
       <AppHero />
       <FeaturedProducts />
+      <AppFooter />
     </main>
   );
 }
