@@ -28,15 +28,47 @@ export const useCartStore = create<CartState>()((set) => ({
           body: JSON.stringify(requestBody),
         });
 
-        const result = await response.json();
-        console.log("result", result);
+        if (response.ok) {
+          const result = await response.json();
 
-        set({ cart: result });
-        localStorage.setItem("cart", JSON.stringify(result));
-        return result;
+          set({ cart: result });
+          localStorage.setItem("cart", JSON.stringify(result));
+          return result;
+        } else {
+          const errorResponse = await response.json();
+          console.error("Falha ao criar carrinho:", errorResponse);
+        }
       }
     } catch (error) {
-      console.error("Falha ao criar carrinho", error);
+      throw error;
+    }
+  },
+
+  updateCart: async (sessionId, gsic, updateCart) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/v1/carts/${sessionId}/${gsic}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateCart),
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        set({ cart: result });
+        localStorage.setItem("cart", JSON.stringify(result));
+
+        return result;
+      } else {
+        const errorResponse = await response.json();
+        console.error("Falha ao atualizar carrinho:", errorResponse);
+      }
+    } catch (error) {
+      throw error;
     }
   },
 }));

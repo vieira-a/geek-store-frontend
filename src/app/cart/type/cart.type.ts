@@ -6,6 +6,12 @@ type CartItem = {
   subtotal: number;
 };
 
+type UpdateCartItem = {
+  slug: string;
+  gsic: string;
+  quantity: number;
+};
+
 export type Cart = {
   sessionId: string;
   gsic: string;
@@ -15,7 +21,16 @@ export type Cart = {
   status: string;
 };
 
+export type UpdateCart = {
+  items: UpdateCartItem[];
+};
+
 export type CartState = {
   cart: Cart;
   createCart: (productSlug: string, productGsic: string) => Promise<Cart>;
+  updateCart: (
+    sessionId: string,
+    gsic: string,
+    updateCart: UpdateCart
+  ) => Promise<Cart>;
 };

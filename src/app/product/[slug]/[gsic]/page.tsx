@@ -8,13 +8,22 @@ import { useCartStore } from "@/app/cart/store/cart.store";
 
 export default function ProductDetail() {
   const { slug, gsic } = useParams();
-  const { createCart, cart } = useCartStore();
+  const { createCart, cart, updateCart } = useCartStore();
 
   const { product, findProductBySlugAndGsic } = useProductStore();
 
   const handleCreateCart = (productSlug: string, productGsic: string) => {
-    console.log("productSlug", productSlug);
-    console.log("productGsic", productGsic);
+    const localStorageCart = localStorage.getItem("cart");
+
+    if (localStorageCart) {
+      console.log("ProductDetail > Atualizando carrinho");
+      const { sessionId, gsic } = JSON.parse(localStorageCart);
+
+      updateCart(sessionId, gsic, {
+        items: [{ slug: productSlug, gsic: productGsic, quantity: 1 }],
+      });
+    }
+
     createCart(productSlug, productGsic);
   };
 
