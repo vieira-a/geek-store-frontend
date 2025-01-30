@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCartStore } from "../store/cart.store";
 import { Cart } from "../type/cart.type";
+import Image from "next/image";
 
 type ProductCartCardProps = {
   slug: string;
@@ -43,15 +44,17 @@ export default function ProductCartCard(productProps: ProductCartCardProps) {
     if (quantity !== productProps.quantity) {
       updateCartQuantityLocally(quantity);
     }
-  }, [quantity]);
+  }, [quantity, productProps.quantity, updateCartQuantityLocally]);
 
   return (
     <div className="flex justify-between h-full p-6 gap-6">
       <div className="flex gap-4 max-w-[350px]">
-        <img
+        <Image
+          width={24}
+          height={24}
           src={productProps.imageUrl}
           alt="Product"
-          className="w-24 h-24 object-cover"
+          className="object-cover"
         />
         <div className="flex flex-col gap-2">
           <h3 className="text-lg font-semibold">{productProps.name}</h3>

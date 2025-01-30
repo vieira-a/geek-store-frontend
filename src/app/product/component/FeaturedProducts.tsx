@@ -1,16 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useProductStore } from "../store/product.store";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
 
 export default function FeaturedProducts() {
-  const { data, meta, fetchProducts } = useProductStore();
+  const { data, fetchProducts } = useProductStore();
+
+  const fetchProductsCallback = useCallback(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProductsCallback();
+  }, [fetchProductsCallback]);
 
   return (
     <section className="px-60 py-8">

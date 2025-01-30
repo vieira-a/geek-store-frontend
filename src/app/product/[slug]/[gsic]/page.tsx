@@ -1,14 +1,14 @@
 "use client";
 
-import AppHeader from "@/module/shared/component/AppHeader";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useProductStore } from "../../store/product.store";
 import { useCartStore } from "@/app/cart/store/cart.store";
+import Image from "next/image";
 
 export default function ProductDetail() {
   const { slug, gsic } = useParams();
-  const { createCart, cart, updateCart } = useCartStore();
+  const { createCart, updateCart } = useCartStore();
 
   const { product, findProductBySlugAndGsic } = useProductStore();
 
@@ -31,7 +31,7 @@ export default function ProductDetail() {
     if (slug && gsic) {
       findProductBySlugAndGsic(slug as string, gsic as string);
     }
-  }, [slug, gsic]);
+  }, [slug, gsic, findProductBySlugAndGsic]);
 
   if (!product) {
     return <div>Carregando detalhes do produto...</div>;
@@ -42,7 +42,7 @@ export default function ProductDetail() {
       <div className="grid grid-cols-2 gap-8 max-w-[800px] mx-auto">
         <div>
           <h1 className="text-2xl font-bold">{product.name}</h1>
-          <img
+          <Image
             width={400}
             src={product.imageUrl}
             alt={product.name}
